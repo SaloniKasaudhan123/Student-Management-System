@@ -4,7 +4,7 @@ const studentSchema = new mongoose.Schema({
     stuID: {
         type: String,
         required: [true, "Student ID is required"],
-        unique:true,
+        unique:[true,"Student ID should be unique"],
         trim:true,
         uppercase:true,
         minLength:[6, "Student ID must be at least 6 characters"],
@@ -35,14 +35,14 @@ const studentSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: [true, "Phone number is required"],
-        unique:true,
+        unique:[true, "phone number should be unique"]
     },
     email: {
         type: String,
         required: [true, "Email is required"],
         trim:true,
         lowercase:true,
-        unique:true
+        unique:[true, "Email should be unique"]
     },
     address: {
         city: {
