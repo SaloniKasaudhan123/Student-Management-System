@@ -5,15 +5,16 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: [true, "Student ID is required"],
         unique:true,
-        minLength:6,
-        maxLength:20
+        trim:true,
+        uppercase:true,
+        minLength:[6, "Student ID must be at least 6 characters"],
+        maxLength:[20, "Student ID must be at most 20 characters"]
     },
     name: {
         type: String,
         required: [true, "Name is required"],
-        minLength:3,
-        maxLength:50
-
+        minLength:[3, "Name must be at least 3 characters"],
+        maxLength:[50, "Name must be at most 50 characters"]
     },
     age: {
         type: Number,
@@ -32,7 +33,7 @@ const studentSchema = new mongoose.Schema({
         required: [true, "Date of Birth is required"],
     },
     phone: {
-        type: Number,
+        type: String,
         required: [true, "Phone number is required"],
         unique:true,
     },
@@ -55,7 +56,7 @@ const studentSchema = new mongoose.Schema({
 
         },
         pincode: {
-            type: Number,
+            type: String,
             required: [true, "Pincode is required"],
 
         }

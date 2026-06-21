@@ -15,12 +15,12 @@ export const addStudent = async (req, res) => {
     }
 }
 
+
 export const getStudent = async (req , res) =>{
     try{
         const student = await Student.find();
         res.status(200).json({
             success:true,
-            message:"Get all students",
             data:student
         })
     }catch(err){
