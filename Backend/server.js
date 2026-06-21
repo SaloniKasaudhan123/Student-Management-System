@@ -1,3 +1,4 @@
+import router from './src/routes/student.route.js';
 import connectDB from './src/cofig/db.js';
 import app from './src/app.js';
 import dotenv from 'dotenv';
@@ -5,11 +6,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
-async function server() {
-    await connectDB();
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
+try{
+    connectDB();
+    console.log("mongo", process.env.MONGO_URL)
+}catch(err){
+    throw err;
 }
 
-server();
+
+app.use("/api",router)
+
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    })
