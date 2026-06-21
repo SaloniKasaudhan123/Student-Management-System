@@ -64,10 +64,12 @@ const studentSchema = new mongoose.Schema({
     course: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Course",
+        required:true,
     },
     isActive: {
         type: Boolean,
-    },
+        default:true,
+    }
 }, { timestamps: true });
 
 export const Student = mongoose.model("Student", studentSchema);
