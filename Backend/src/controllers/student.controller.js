@@ -57,7 +57,7 @@ export const updateStudent = async (req , res) =>{
         const student = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json({
             success: true,
-            message:"Student updated successfully",
+            message:"Student Updated successfully",
             data: student 
         })
     }catch(err){
@@ -72,7 +72,7 @@ export const deleteStudent = async (req , res) =>{
         await Student.findByIdAndDelete(req.params.id);
         res.status(200).json({
             success: true,
-            message:"Student deleted successfully",
+            message:"Student Deleted successfully",
         })
     }catch(err){
         res.status(500).json({

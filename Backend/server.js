@@ -1,4 +1,3 @@
-import router from './src/routes/student.route.js';
 import { errorHandler } from './src/middlewares/error.middleware.js';
 import connectDB from './src/cofig/db.js';
 import app from './src/app.js';
@@ -13,8 +12,6 @@ try{
 }catch(err){
     throw err;
 }
-
-app.use("/api",router)
 
 app.use(errorHandler);
 
