@@ -66,6 +66,10 @@ const studentSchema = new mongoose.Schema({
         ref: "Course",
         required:true,
     },
+    admissionDate: {
+        type: Date,
+        required: [true, "Admission date is required"],
+    },
     isActive: {
         type: Boolean,
         default:true,

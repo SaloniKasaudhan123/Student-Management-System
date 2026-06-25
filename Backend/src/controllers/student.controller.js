@@ -2,7 +2,9 @@ import { Student } from "../models/Student.model.js";
 
 export const addStudent = async (req, res) => {
     try {
-        await Student.create(req.body);
+        console.log("req",req.body)
+        await Student.create({...req.body,age:Number(req.body.age)});
+        console.log("Student",Student)
         res.status(201).json({
             success: true,
             message: "Student Added Successfully"
@@ -24,7 +26,7 @@ export const addStudent = async (req, res) => {
 
 export const getStudent = async (req, res) => {
     try {
-        const student = await Student.find();
+        const student = await Student.find().populate("course");
         res.status(200).json({
             success: true,
             data: student
