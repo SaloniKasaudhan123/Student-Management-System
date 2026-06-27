@@ -5,29 +5,40 @@ import { FaRegEye , FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {useNavigate} from 'react-router'
 
-
+const url = import.meta.env.VITE_URL;
 
 
 export function AllStudent() {
     const [student, setStudent] = useState([]);
     const navi = useNavigate();
 
+    async function fetchStudent() {
+        console.log(`url ${url}`)
+        const res = await axios.get(`${url}/student`);
+        const students = res.data.data;
+        console.log(students)
+        setStudent(students)
+    }
     useEffect(() => {
-        async function fetchStudent() {
-            const res = await axios.get("http://localhost:3000/api/student/");
-            const students = res.data.data;
-            console.log(students)
-            setStudent(students)
-        }
         fetchStudent();
     }, [])
+
+
+    const handleDelete = async (id) =>{
+        try{
+            await axios.delete(`${url}/student/${id}`);
+        }catch(err){
+            throw err;
+        }
+        fetchStudent();
+    }
 
 
     return <>
         <div>
             <div className="py-2 px-4 flex justify-between shadow-2xl shadow-gray-300">
                 <h1 className="text-xl sm:text-2xl font-bold">Student</h1>
-                <button className="p-2 bg-blue-600 text-white rounded-sm" onClick={()=>navi("/student/add")}>+ Add Student</button>
+                <button className="p-2 bg-blue-600 text-white rounded-sm" onClick={()=>navi(`/student/add`)}>+ Add Student</button>
             </div>
             <div className="py-5 px-2 sm:px-10 md:px-15 lg:px-20 flex justify-between ">
                <span className="flex">
@@ -70,9 +81,9 @@ export function AllStudent() {
                                 <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{item.email}</td>
                                 <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{item.phone}</td>
                                 <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black flex gap-2 sm:gap-5 md:gap-7">
-                                    <FaRegEye className="size-5 sm:size-6 text-blue-600 bg-gray-200 p-1 rounded-lg" onClick={()=>navi("/student/id")}/>
-                                    <FaPencilAlt className="size-5 sm:size-6 bg-gray-200 p-1 rounded-lg" onClick={()=>navi("/student/edit/id")}/>
-                                    <RiDeleteBin6Line className="size-5 sm:size-6 text-red-600 bg-gray-200 p-1 rounded-lg"/>
+                                    <FaRegEye className="size-5 sm:size-6 text-blue-600 bg-gray-200 p-1 rounded-lg" onClick={()=>navi(`/student/${item._id}`)}/>
+                                    <FaPencilAlt className="size-5 sm:size-6 bg-gray-200 p-1 rounded-lg" onClick={()=>navi(`/student/edit/${item._id}`)}/>
+                                    <RiDeleteBin6Line className="size-5 sm:size-6 text-red-600 bg-gray-200 p-1 rounded-lg" onClick={()=>handleDelete(item._id)}/>
                                 </td>
                                 </tr>
                             </tbody>

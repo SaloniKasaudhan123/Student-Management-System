@@ -18,7 +18,7 @@ export function MainLayout() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/student" element={<Student />} />
                 <Route path="/student/add" element={<AddStudent />} />
-                <Route path="/student/id" element={<SingleStudent />} />
+                <Route path="/student/:id" element={<SingleStudent />} />
                 <Route path="/student/edit/:id" element={<EditStudent />} />
                 <Route path="/course" element={<Course />} />
                 <Route path="/attendence" element={<Attendence />} />

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router"
+const url = import.meta.env.VITE_URL;
 
 
 
@@ -23,7 +24,7 @@ export function AddStudent() {
     
     useEffect(()=>{
         async function Course(){
-            const res = await axios.get("http://localhost:3000/api/course")
+            const res = await axios.get(`${url}/course`)
             console.log("cou",res.data.data)
             const course  = res.data.data;
             setAllCourses(course);
@@ -49,10 +50,8 @@ export function AddStudent() {
                 course,
                 admissionDate
             })
-            console.log("res " , res.message);
-            console.log("res " , res);
         }catch(err){
-            console.log("err" ,err)
+            throw err
         }
     }
 
@@ -65,7 +64,7 @@ export function AddStudent() {
                     <p className="text-xs sm:text-xs text-gray-500">&nbsp; Add Student</p>
                 </span>
             </div>
-            <form method="get" className="rounded-lg mt-3 p-2 bg-gray-200/40 flex flex-col gap-5" onSubmit={(e) => handleAddStudent(e)}>
+            <form method="get" className="rounded-lg mt-3 pl-15 pt-5 bg-gray-200/40 flex flex-col gap-5" onSubmit={(e) => handleAddStudent(e)}>
                 <span className="mb-2 flex gap-5">
                     <label htmlFor="stuId" className="text-sm font-medium mt-2">Student ID : </label>
                     <input type="text" placeholder="Enter Student Id" name="stuId" id="stuId"  className="p-2 border border-gray-400 rounded-lg" onChange={(e)=>setStuId(e.target.value)}/>
