@@ -13,10 +13,8 @@ export function AllStudent() {
     const navi = useNavigate();
 
     async function fetchStudent() {
-        console.log(`url ${url}`)
         const res = await axios.get(`${url}/student`);
         const students = res.data.data;
-        console.log(students)
         setStudent(students)
     }
     useEffect(() => {

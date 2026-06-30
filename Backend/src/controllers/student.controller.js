@@ -41,7 +41,7 @@ export const getStudent = async (req, res) => {
 
 export const getStudentById = async (req, res) => {
     try {
-        const student = await Student.findById(req.params.id);
+        const student = await Student.findById(req.params.id).populate("course");
         res.status(200).json({
             success: true,
             data: student

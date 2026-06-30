@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router"
 const url = import.meta.env.VITE_URL;
+import {ToastContainer , toast} from 'react-toastify'
 
 
 
-export function AddStudent() {
+export function EditStudent() {
     const navi = useNavigate();
     const [allCourses , setAllCourses] = useState([]);
     const [stuID , setStuId] = useState("");
@@ -36,7 +37,7 @@ export function AddStudent() {
     async function handleAddStudent(e) {
         e.preventDefault();
         try{
-            const res = await axios.post("http://localhost:3000/api/student" , {
+            const res = await axios.post(`${url}/student` , {
                 stuID,
                 name,
                 age,
@@ -49,16 +50,23 @@ export function AddStudent() {
                 pincode},
                 course,
                 admissionDate
-            })
+            });
+            toast.success(res.data.message);
         }catch(err){
-            throw err
+            console.log("weerrr",err.message);
+            toast.error(err.message);
+            // throw err
         }
+    }
+
+    function handleAdd(){
+        toast.success("Great!")
     }
 
     return <>
         <div className="m-5 sm:m-8">
             <div>
-                <h1 className="text-xl font-bold">Add Student</h1>
+                <h1 className="text-xl font-bold" onClick={handleAdd}>Add Student</h1>
                 <span className="flex m-1 mb-5">
                     <p onClick={() => navi("/student")} className="text-xs sm:text-xs text-gray-500">Student &nbsp; &gt;</p>
                     <p className="text-xs sm:text-xs text-gray-500">&nbsp; Add Student</p>
@@ -121,12 +129,7 @@ export function AddStudent() {
                     { 
                         allCourses.map((item)=>(
                         <option value={item._id} key={item._id}>{item.courseName}</option>
-                       // <option value="mca">MCA</option>
-                        //<option value="bba">BBA</option>
-                        //<option value="mba">MBA</option>
-                        //<option value="bcom">Bcom</option>
-                        //<option value="btech">Btech</option>
-                        //<option value="bpharm">Bpharm</option> 
+                       
                     ))
                 }
                 </select>                    
@@ -141,6 +144,7 @@ export function AddStudent() {
                 </span>
 
             </form>
+            <ToastContainer />
         </div>
     </>
 }
