@@ -6,7 +6,7 @@ import {ToastContainer , toast} from 'react-toastify'
 
 
 
-export function EditStudent() {
+export function AddStudent() {
     const navi = useNavigate();
     const [allCourses , setAllCourses] = useState([]);
     const [stuID , setStuId] = useState("");
@@ -26,7 +26,6 @@ export function EditStudent() {
     useEffect(()=>{
         async function Course(){
             const res = await axios.get(`${url}/course`)
-            console.log("cou",res.data.data)
             const course  = res.data.data;
             setAllCourses(course);
         }
@@ -53,20 +52,15 @@ export function EditStudent() {
             });
             toast.success(res.data.message);
         }catch(err){
-            console.log("weerrr",err.message);
             toast.error(err.message);
-            // throw err
+            throw err
         }
-    }
-
-    function handleAdd(){
-        toast.success("Great!")
     }
 
     return <>
         <div className="m-5 sm:m-8">
             <div>
-                <h1 className="text-xl font-bold" onClick={handleAdd}>Add Student</h1>
+                <h1 className="text-xl font-bold" >Add Student</h1>
                 <span className="flex m-1 mb-5">
                     <p onClick={() => navi("/student")} className="text-xs sm:text-xs text-gray-500">Student &nbsp; &gt;</p>
                     <p className="text-xs sm:text-xs text-gray-500">&nbsp; Add Student</p>

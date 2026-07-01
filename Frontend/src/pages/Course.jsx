@@ -1,3 +1,4 @@
+import { AllCourses } from "../components/course/AllCourses";
 
 
 export function Course(){
@@ -5,9 +6,7 @@ export function Course(){
 
     return<>
     <div>
-        <div>
-            <h1>Course</h1>
-        </div>
+        <AllCourses />
     </div>
     </>
 }

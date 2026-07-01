@@ -27,7 +27,6 @@ export function EditStudent() {
     useEffect(() => {
         async function Course() {
             const res = await axios.get(`${url}/course`)
-            console.log("cou", res.data.data)
             const course = res.data.data;
             setAllCourses(course);
         }
