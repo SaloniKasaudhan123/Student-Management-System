@@ -2,7 +2,7 @@ import { Course } from "../models/Course.model.js";
 
 export const addCourse = async (req , res) =>{
     try{
-        await Course.create(req.body);
+        await Course.create({...req.body,duration:Number(req.body.duration) , fee:Number(req.body.fee)});
         res.status(201).json({
             success: true,
             message: "Course Added Successfully"

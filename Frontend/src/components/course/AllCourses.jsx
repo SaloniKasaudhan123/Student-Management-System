@@ -16,7 +16,6 @@ export function AllCourses() {
     const getCourses = async () =>{
         const res = await axios.get(`${url}/course`);
         const courses = res.data.data;
-        console.log(courses);
         setCourses(courses);
     }
 
@@ -58,8 +57,8 @@ export function AllCourses() {
                                 <tr>
                                     <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{index + 1}</td>
                                     <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{item.courseName}</td>
-                                    <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{item.duration} months</td>
-                                    <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">₹{item.fee}</td>
+                                    <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{item.duration} yeras</td>
+                                    <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">₹{item.fee}/year</td>
                                     <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black">{item.description}</td>
                                     <td className="py-3 px-2 sm:px-10 text-sm font-medium text-shadow-black flex gap-2 sm:gap-5 md:gap-7">
                                       <FaPencilAlt className="size-7 bg-gray-200 rounded-lg p-1" onClick={()=>navi(`/course/edit/${item._id}`)}/>

@@ -2,9 +2,7 @@ import { Student } from "../models/Student.model.js";
 
 export const addStudent = async (req, res) => {
     try {
-        console.log("req",req.body)
         await Student.create({...req.body,age:Number(req.body.age)});
-        console.log("Student",Student)
         res.status(201).json({
             success: true,
             message: "Student Added Successfully"

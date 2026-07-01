@@ -54,6 +54,7 @@ export function EditStudent() {
                 admissionDate
             })
             toast.success(res.data.message)
+            navi("/student");
         } catch (err) {
             toast.error(err.message)
             throw err

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router"
 const url = import.meta.env.VITE_URL;
-import {ToastContainer , toast} from 'react-toastify'
+import {toast} from 'react-toastify'
 
 
 
@@ -51,6 +51,7 @@ export function AddStudent() {
                 admissionDate
             });
             toast.success(res.data.message);
+            navi("/student")
         }catch(err){
             toast.error(err.message);
             throw err
@@ -138,7 +139,6 @@ export function AddStudent() {
                 </span>
 
             </form>
-            <ToastContainer />
         </div>
     </>
 }
