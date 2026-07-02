@@ -16,7 +16,12 @@ export const markAttendence = async (req , res) =>{
 }
 export const getAttendence = async (req , res) =>{
     try{
-        const attendance = await Attendence.find();
+        const attendance = await Attendence.find().populate("student").populate({
+            path:"student",
+            populate:{
+                path:"course"
+            }
+        });
         res.status(201).json({
             success:true,
             data:attendance,

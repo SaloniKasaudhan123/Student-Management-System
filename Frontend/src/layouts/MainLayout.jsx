@@ -9,6 +9,7 @@ import {Course} from "../pages/Course";
 import { AddCourse } from "../components/course/AddCourse";
 import { EditCourse } from "../components/course/EditCourse";
 import {Attendence} from "../pages/Attendence";
+import { MarkAttendence } from "../components/attendence/markAttendence";
 
 
 export function MainLayout() {
@@ -26,6 +27,7 @@ export function MainLayout() {
                 <Route path="/course/add" element={<AddCourse />} />
                 <Route path="/course/edit/:id" element={<EditCourse />} />
                 <Route path="/attendence" element={<Attendence />} />
+                <Route path="/attendence/mark" element={<MarkAttendence />} />
             </Routes>
         </div>
     </>

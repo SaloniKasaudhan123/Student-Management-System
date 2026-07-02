@@ -1,4 +1,4 @@
-
+import { AllAttendence } from "../components/attendence/AllAttendence"
 
 export function Attendence(){
     
@@ -6,7 +6,7 @@ export function Attendence(){
     return<>
     <div>
         <div>
-            <h1>Attendence</h1>
+            <AllAttendence />
         </div>
     </div>
     </>

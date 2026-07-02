@@ -6,7 +6,9 @@ import cors from 'cors'
 
 
 const app = express();
-app.use(cors("http://localhost:5173"))
+app.use(cors({
+  origin: process.env.FRONTEND_URL
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use("/api/student" , studentRouter)
