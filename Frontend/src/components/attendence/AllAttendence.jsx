@@ -7,6 +7,7 @@ const url = import.meta.env.VITE_URL;
 
 export function AllAttendence(){
     const navi = useNavigate();
+    const [date , setDate] = useState("") 
     const [attendence , setAttendence] = useState([]);
     
 
@@ -15,14 +16,22 @@ export function AllAttendence(){
             const res = await axios.get(`${url}/attendence`);
             const attendence = res.data.data;
             console.log("att", attendence);
-            setAttendence(attendence);
+            console.log("date", date);
+            let i = 0;
+            while(i < attendence.length){
+                if(attendence[i].date == date){
+                    console.log("date" , attendence[i].markAttendence[3].status)
+                    setAttendence(attendence[i].markAttendence);
+                }
+                i++;
+            }
         }catch(err){
             throw err
         }
     }
     useEffect(()=>{
         getAttendence();
-    },[])
+    },[date])
 
     return<>
     <div>
@@ -34,7 +43,7 @@ export function AllAttendence(){
             <div className="py-5 px-2 sm:px-10 md:px-15 lg:px-20 flex justify-between">
                 <span className="flex flex-col">
                 <label htmlFor="date" className="text-sm text-gray-500">Select Date</label>
-                <input type="date" name="date" id="date" className="border-2 border-gray-300 p-2"/>
+                <input type="date" name="date" id="date" className="border-2 border-gray-300 p-2" onChange={(e)=>setDate(e.target.value + "T00:00:00.000Z")}/>
                 </span>
                 <span className="flex flex-col">
                 <label htmlFor="course" className="text-sm text-gray-500">Select Course</label>

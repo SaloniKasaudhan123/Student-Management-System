@@ -1,77 +1,84 @@
 import { Attendence } from "../models/attendence.model.js";
 
-export const markAttendence = async (req , res) =>{
-    try{
+export const markAttendence = async (req, res) => {
+    try {
+        const exists = await Attendence.findOne({date: req.body.date});
+        if(exists) {
+            return res.status(400).json({
+                success:false,
+                message:"Attendence for this date already exists"
+            })
+        }
         await Attendence.create(req.body);
         res.status(201).json({
-            success:true,
-            message:"Attendence Marked"
+            success: true,
+            message: "Attendence Marked"
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            success:false,
-            message:err.message
+            success: false,
+            message: err.message
         })
     }
 }
-export const getAttendence = async (req , res) =>{
-    try{
-        const attendance = await Attendence.find().populate("student").populate({
-            path:"student",
-            populate:{
-                path:"course"
-            }
+export const getAttendence = async (req, res) => {
+    try {
+        const attendance = await Attendence.find().populate({
+            path: "markAttendence.student",
+            populate: {
+                path: "course",
+            },
         });
         res.status(201).json({
-            success:true,
-            data:attendance,
+            success: true,
+            data: attendance,
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            success:false,
-            message:err.message
+            success: false,
+            message: err.message
         })
     }
 }
-export const getAttendenceById = async (req , res) =>{
-    try{
+export const getAttendenceById = async (req, res) => {
+    try {
         const attendance = await Attendence.findById(req.params.id);
         res.status(201).json({
-            success:true,
-            data:attendance,
+            success: true,
+            data: attendance,
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            success:false,
-            message:err.message
+            success: false,
+            message: err.message
         })
     }
 }
-export const updateAttendence = async (req , res) =>{
-    try{
-        await Attendence.findByIdAndUpdate(req.params.id , req.body, {new:true});
+export const updateAttendence = async (req, res) => {
+    try {
+        await Attendence.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(201).json({
-            success:true,
-            message:"Attendence updated successfully"
+            success: true,
+            message: "Attendence updated successfully"
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            success:false,
-            message:err.message
+            success: false,
+            message: err.message
         })
     }
 }
-export const deleteAttendence = async (req , res) =>{
-    try{
+export const deleteAttendence = async (req, res) => {
+    try {
         await Attendence.findByIdAndDelete(req.params.id);
         res.status(201).json({
-            success:true,
-            message:"Attendence deleted successfully"
+            success: true,
+            message: "Attendence deleted successfully"
         })
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            success:false,
-            message:err.message
+            success: false,
+            message: err.message
         })
     }
 }
